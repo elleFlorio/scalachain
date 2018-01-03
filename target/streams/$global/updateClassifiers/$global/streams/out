@@ -1,0 +1,331 @@
+[debug] :: resolving dependencies :: default#scalachain$sources;0.1
+[debug] 	confs: [compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool]
+[debug] 	validate = true
+[debug] 	refresh = false
+[debug] resolving dependencies for configuration 'compile'
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->default]
+[debug] sbt-chain: Checking cache for: dependency: org.scala-lang#scala-library;2.12.4 {compile=[default, compile, runtime, default(compile), master], runtime=[default, compile, runtime, default(compile), master], test=[default, compile, runtime, default(compile), master], compile-internal=[default, compile, runtime, default(compile), master], runtime-internal=[default, compile, runtime, default(compile), master], test-internal=[default, compile, runtime, default(compile), master], scala-tool=[default, master(*), compile, runtime(*), runtime, optional, optional(default), compile(*), master]}
+[debug] sbt-chain: module revision found in cache: org.scala-lang#scala-library;2.12.4
+[debug] 	found org.scala-lang#scala-library;2.12.4 in sbt-chain
+[debug] 	[2.12.4] org.scala-lang#scala-library;2.12.4
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] resolving dependencies for configuration 'runtime'
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [runtime]
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->master]
+[debug] resolving dependencies for configuration 'test'
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [test]
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [runtime]
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->master]
+[debug] resolving dependencies for configuration 'provided'
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [provided]
+[debug] resolving dependencies for configuration 'optional'
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [optional]
+[debug] resolving dependencies for configuration 'compile-internal'
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [compile-internal]
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [optional]
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [provided]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile-internal->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile-internal->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile-internal->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile-internal->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile-internal->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile-internal->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile-internal->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile-internal->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile-internal->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile-internal->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile-internal->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile-internal->master]
+[debug] resolving dependencies for configuration 'runtime-internal'
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [runtime-internal]
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [runtime]
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->master]
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [optional]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime-internal->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime-internal->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime-internal->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime-internal->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime-internal->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime-internal->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime-internal->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime-internal->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime-internal->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime-internal->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime-internal->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime-internal->master]
+[debug] resolving dependencies for configuration 'test-internal'
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [test-internal]
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [test]
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [runtime]
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [runtime->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test->master]
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [optional]
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [provided]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test-internal->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test-internal->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test-internal->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test-internal->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test-internal->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test-internal->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test-internal->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test-internal->default(compile)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test-internal->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test-internal->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test-internal->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [test-internal->master]
+[debug] resolving dependencies for configuration 'plugin'
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [plugin]
+[debug] resolving dependencies for configuration 'pom'
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [pom]
+[debug] resolving dependencies for configuration 'scala-tool'
+[debug] == resolving dependencies for default#scalachain$sources;0.1 [scala-tool]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [scala-tool->default]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [scala-tool->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [scala-tool->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [scala-tool->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [scala-tool->master(*)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [scala-tool->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [scala-tool->runtime(*)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [scala-tool->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [scala-tool->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [scala-tool->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [scala-tool->optional]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [scala-tool->optional(default)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [scala-tool->compile(*)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-library;2.12.4 [scala-tool->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang.modules#scala-xml_2.12;1.0.6 [scala-tool->master(*)]
+[debug] sbt-chain: Checking cache for: dependency: org.scala-lang.modules#scala-xml_2.12;1.0.6 {scala-tool=[master(*), compile, runtime(*), runtime, compile(*), master]}
+[debug] sbt-chain: module revision found in cache: org.scala-lang.modules#scala-xml_2.12;1.0.6
+[debug] 	found org.scala-lang.modules#scala-xml_2.12;1.0.6 in sbt-chain
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang.modules#scala-xml_2.12;1.0.6 [scala-tool->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang.modules#scala-xml_2.12;1.0.6 [scala-tool->runtime(*)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang.modules#scala-xml_2.12;1.0.6 [scala-tool->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang.modules#scala-xml_2.12;1.0.6 [scala-tool->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang.modules#scala-xml_2.12;1.0.6 [scala-tool->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang.modules#scala-xml_2.12;1.0.6 [scala-tool->compile(*)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang.modules#scala-xml_2.12;1.0.6 [scala-tool->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-reflect;2.12.4 [scala-tool->master(*)]
+[debug] sbt-chain: Checking cache for: dependency: org.scala-lang#scala-reflect;2.12.4 {scala-tool=[master(*), compile, runtime(*), runtime, compile(*), master]}
+[debug] sbt-chain: module revision found in cache: org.scala-lang#scala-reflect;2.12.4
+[debug] 	found org.scala-lang#scala-reflect;2.12.4 in sbt-chain
+[debug] 	[2.12.4] org.scala-lang#scala-reflect;2.12.4
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-reflect;2.12.4 [scala-tool->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-reflect;2.12.4 [scala-tool->runtime(*)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-reflect;2.12.4 [scala-tool->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-reflect;2.12.4 [scala-tool->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-reflect;2.12.4 [scala-tool->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-reflect;2.12.4 [scala-tool->compile(*)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-reflect;2.12.4 [scala-tool->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->jline#jline;2.14.5 [scala-tool->master(*)]
+[debug] sbt-chain: Checking cache for: dependency: jline#jline;2.14.5 {scala-tool=[master(*), compile, compile(*), master]}
+[debug] sbt-chain: module revision found in cache: jline#jline;2.14.5
+[debug] 	found jline#jline;2.14.5 in sbt-chain
+[debug] == resolving dependencies default#scalachain$sources;0.1->jline#jline;2.14.5 [scala-tool->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->jline#jline;2.14.5 [scala-tool->compile(*)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->jline#jline;2.14.5 [scala-tool->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-compiler;2.12.4 [scala-tool->default]
+[debug] sbt-chain: Checking cache for: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, compile, runtime, optional, optional(default), master]}
+[debug] sbt-chain: module revision found in cache: org.scala-lang#scala-compiler;2.12.4
+[debug] 	found org.scala-lang#scala-compiler;2.12.4 in sbt-chain
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-compiler;2.12.4 [scala-tool->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-compiler;2.12.4 [scala-tool->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-compiler;2.12.4 [scala-tool->master]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-compiler;2.12.4 [scala-tool->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-compiler;2.12.4 [scala-tool->runtime]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-compiler;2.12.4 [scala-tool->compile]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-compiler;2.12.4 [scala-tool->optional]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-compiler;2.12.4 [scala-tool->optional(default)]
+[debug] == resolving dependencies default#scalachain$sources;0.1->org.scala-lang#scala-compiler;2.12.4 [scala-tool->master]
+[debug] 	resolved ivy file produced in cache
+[debug] :: downloading artifacts ::
+[debug] 		tried /Users/lucaflorio/.ivy2/local/org.scala-lang.modules/scala-xml_2.12/1.0.6/srcs/scala-xml_2.12-sources.jar
+[debug] 		tried /Users/lucaflorio/.ivy2/local/jline/jline/2.14.5/srcs/jline-sources.jar
+[debug] 		tried https://repo1.maven.org/maven2/jline/jline/2.14.5/jline-2.14.5-sources.jar
+[debug] 		tried /Users/lucaflorio/.ivy2/local/org.scala-lang/scala-reflect/2.12.4/srcs/scala-reflect-sources.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.0.6/scala-xml_2.12-1.0.6-sources.jar
+[debug] 		tried /Users/lucaflorio/.ivy2/local/org.scala-lang/scala-library/2.12.4/srcs/scala-library-sources.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.4/scala-reflect-2.12.4-sources.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.4/scala-library-2.12.4-sources.jar
+[info] downloading https://repo1.maven.org/maven2/jline/jline/2.14.5/jline-2.14.5-sources.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/jline/jline/2.14.5/jline-2.14.5-sources.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.0.6/scala-xml_2.12-1.0.6-sources.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.0.6/scala-xml_2.12-1.0.6-sources.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.4/scala-library-2.12.4-sources.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.4/scala-library-2.12.4-sources.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.4/scala-reflect-2.12.4-sources.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.4/scala-reflect-2.12.4-sources.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/jline/jline/2.14.5/jline-2.14.5-sources.jar.sha1
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.0.6/scala-xml_2.12-1.0.6-sources.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/jline/jline/2.14.5/jline-2.14.5-sources.jar
+[info] 	[SUCCESSFUL ] jline#jline;2.14.5!jline.jar(src) (828ms)
+[debug] 		tried /Users/lucaflorio/.ivy2/local/org.scala-lang/scala-compiler/2.12.4/srcs/scala-compiler-sources.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.12.4/scala-compiler-2.12.4-sources.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.12.4/scala-compiler-2.12.4-sources.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.12.4/scala-compiler-2.12.4-sources.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.4/scala-reflect-2.12.4-sources.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.0.6/scala-xml_2.12-1.0.6-sources.jar
+[info] 	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.12;1.0.6!scala-xml_2.12.jar(src) (912ms)
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.4/scala-reflect-2.12.4-sources.jar
+[info] 	[SUCCESSFUL ] org.scala-lang#scala-reflect;2.12.4!scala-reflect.jar(src) (1012ms)
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.4/scala-library-2.12.4-sources.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.4/scala-library-2.12.4-sources.jar
+[info] 	[SUCCESSFUL ] org.scala-lang#scala-library;2.12.4!scala-library.jar(src) (3918ms)
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.12.4/scala-compiler-2.12.4-sources.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.12.4/scala-compiler-2.12.4-sources.jar
+[info] 	[SUCCESSFUL ] org.scala-lang#scala-compiler;2.12.4!scala-compiler.jar(src) (7825ms)
+[debug] :: resolution report :: resolve 50ms :: artifacts dl 8661ms
+[debug] 	report for default#scalachain$sources;0.1 compile produced in /Users/lucaflorio/Development/scala/scalachain/target/scala-2.12/resolution-cache/reports/default-scalachain$sources-compile.xml
+[debug] 	report for default#scalachain$sources;0.1 runtime produced in /Users/lucaflorio/Development/scala/scalachain/target/scala-2.12/resolution-cache/reports/default-scalachain$sources-runtime.xml
+[debug] 	report for default#scalachain$sources;0.1 test produced in /Users/lucaflorio/Development/scala/scalachain/target/scala-2.12/resolution-cache/reports/default-scalachain$sources-test.xml
+[debug] 	report for default#scalachain$sources;0.1 provided produced in /Users/lucaflorio/Development/scala/scalachain/target/scala-2.12/resolution-cache/reports/default-scalachain$sources-provided.xml
+[debug] 	report for default#scalachain$sources;0.1 optional produced in /Users/lucaflorio/Development/scala/scalachain/target/scala-2.12/resolution-cache/reports/default-scalachain$sources-optional.xml
+[debug] 	report for default#scalachain$sources;0.1 compile-internal produced in /Users/lucaflorio/Development/scala/scalachain/target/scala-2.12/resolution-cache/reports/default-scalachain$sources-compile-internal.xml
+[debug] 	report for default#scalachain$sources;0.1 runtime-internal produced in /Users/lucaflorio/Development/scala/scalachain/target/scala-2.12/resolution-cache/reports/default-scalachain$sources-runtime-internal.xml
+[debug] 	report for default#scalachain$sources;0.1 test-internal produced in /Users/lucaflorio/Development/scala/scalachain/target/scala-2.12/resolution-cache/reports/default-scalachain$sources-test-internal.xml
+[debug] 	report for default#scalachain$sources;0.1 plugin produced in /Users/lucaflorio/Development/scala/scalachain/target/scala-2.12/resolution-cache/reports/default-scalachain$sources-plugin.xml
+[debug] 	report for default#scalachain$sources;0.1 pom produced in /Users/lucaflorio/Development/scala/scalachain/target/scala-2.12/resolution-cache/reports/default-scalachain$sources-pom.xml
+[debug] 	report for default#scalachain$sources;0.1 scala-tool produced in /Users/lucaflorio/Development/scala/scalachain/target/scala-2.12/resolution-cache/reports/default-scalachain$sources-scala-tool.xml
+[debug] 	resolve done (50ms resolve - 8661ms download)
