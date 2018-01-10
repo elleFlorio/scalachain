@@ -1,3 +1,3 @@
 package blockchain
 
-class Block(transactions: List[Transaction], proof: Long)
+class Block(val transactions: List[Transaction], val proof: Long)

@@ -10,6 +10,8 @@ sealed trait Chain {
 
   def block: Block
 
+  def proof: Long
+
   def ::(block: Block): Chain = ChainLink(this.size + 1, block, blockHash, this)
 
 }
@@ -21,6 +23,8 @@ case class ChainLink(index: Int, block: Block, previousHash: String, tail: Chain
   def blockHash = hashBlock(this)
 
   def hashBlock(block: ChainLink): String = Sha256.hash(block.toJson.toString).toString
+
+  def proof = block.proof
 }
 
 
@@ -30,6 +34,8 @@ case object Empty extends Chain {
   def blockHash = null
 
   def block = null
+
+  def proof = null
 }
 
 
