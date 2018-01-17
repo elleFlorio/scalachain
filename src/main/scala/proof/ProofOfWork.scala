@@ -2,30 +2,30 @@ package proof
 
 import spray.json._
 import DefaultJsonProtocol._
-import scorex.crypto.hash.Sha256
+import crypto.Crypto
 import spray.json.pimpAny
 
 import scala.annotation.tailrec
 
 object ProofOfWork {
 
-  def proofOfWork(lastProof: Long): Long = {
+  def proofOfWork(lastHash: String): Long = {
     @tailrec
-    def powHelper(lastProof: Long, proof: Long): Long = {
-      if (validProof(lastProof, proof))
+    def powHelper(lastHash: String, proof: Long): Long = {
+      if (validProof(lastHash, proof))
         proof
       else
-        powHelper(lastProof, proof + 1)
+        powHelper(lastHash, proof + 1)
     }
 
     val proof = 0
-    powHelper(lastProof, proof)
+    powHelper(lastHash, proof)
   }
 
-  def validProof(lastProof: Long, proof: Long): Boolean = {
-    val guess = (lastProof.toString ++ proof.toString).toJson.toString
-    val guessHash = Sha256.hash(guess).toString
-    (guessHash takeRight 4) == "0000"
+  def validProof(lastHash: String, proof: Long): Boolean = {
+    val guess = (lastHash ++ proof.toString).toJson.toString()
+    val guessHash = Crypto.sha256Hash(guess)
+    (guessHash take 2) == "00"
   }
 
 }

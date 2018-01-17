@@ -1,41 +1,39 @@
 package blockchain
 
-import scorex.crypto.hash.Sha256
-import spray.json.pimpAny
+import crypto.Crypto
+import spray.json._
+import utils.BlockchainJsonProtocol._
 
 sealed trait Chain {
-  def size: Int
+  val size: Int
 
-  def blockHash: String
+  val blockHash: String
 
-  def block: Block
+  val block: Block
 
-  def proof: Long
+  val proof: Long
 
   def ::(block: Block): Chain = ChainLink(this.size + 1, block, blockHash, this)
 
 }
 
 case class ChainLink(index: Int, block: Block, previousHash: String, tail: Chain, timestamp: Long = System.currentTimeMillis()) extends Chain {
+  val size = 1 + tail.size
 
-  def size = 1 + tail.size
+  val blockHash = Crypto.sha256Hash(this.toJson.toString)
 
-  def blockHash = hashBlock(this)
-
-  def hashBlock(block: ChainLink): String = Sha256.hash(block.toJson.toString).toString
-
-  def proof = block.proof
+  val proof = block.proof
 }
 
 
-case object Empty extends Chain {
-  def size = 0
+case object EmptyChain extends Chain {
+  val size = 0
 
-  def blockHash = null
+  val blockHash = null
 
-  def block = null
+  val block = null
 
-  def proof = null
+  val proof = -1
 }
 
 
@@ -43,7 +41,7 @@ object Chain {
 
   def apply(blocks: ChainLink*): Chain = {
     if (blocks.isEmpty) {
-      return Empty
+      return EmptyChain
     } else {
       val chainLink = blocks.head
       ChainLink(chainLink.index, chainLink.block, chainLink.previousHash, apply(blocks.tail: _*))

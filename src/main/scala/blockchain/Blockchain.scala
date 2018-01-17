@@ -2,7 +2,7 @@ package blockchain
 
 import scala.collection.mutable.ArrayBuffer
 
-class Blockchain(chain: Chain = Empty) {
+class Blockchain(chain: Chain = EmptyChain) {
 
   val transactions : ArrayBuffer[Transaction] = ArrayBuffer.empty
 
