@@ -5,18 +5,20 @@ import spray.json._
 
 object BlockchainJsonProtocol extends DefaultJsonProtocol {
 
-  //FIXME Cannot automatically determine case class field names and order for 'blockchain.ChainLink'
-  // please use the 'jsonFormat' overload with explicit field name specification
-  implicit val chainLinkJsonFormat = jsonFormat5(ChainLink)
+  implicit object TransactionJsonFormat extends RootJsonFormat[Transaction] {
+    def write(t: Transaction) = JsObject(
+      "sender" -> JsString(t.sender),
+      "recipient" -> JsString(t.recipient),
+      "amount" -> JsNumber(t.amount),
+    )
 
-  implicit object ChainJsonFormat extends RootJsonFormat[Chain] {
-
-    override def write(chain: Chain) = chain match {
-      case _: ChainLink => chain.toJson
-      case _ => serializationError("Cannot serialize empty chain")
+    def read(value: JsValue) = {
+      value.asJsObject.getFields("sender", "recipient", "amount") match {
+        case Seq(JsString(sender), JsString(recipient), JsNumber(amount)) =>
+          new Transaction(sender, recipient, amount.toLong)
+        case _ => throw new DeserializationException("Transaction expected")
+      }
     }
-
-    override def read(value: JsValue) = chainLinkJsonFormat.read(value)
   }
 
   implicit object BlockJsonFormat extends RootJsonFormat[Block] {
@@ -34,20 +36,30 @@ object BlockchainJsonProtocol extends DefaultJsonProtocol {
     }
   }
 
-  implicit object TransactionJsonFormat extends RootJsonFormat[Transaction] {
-    def write(t: Transaction) = JsObject(
-      "sender" -> JsString(t.sender),
-      "recipient" -> JsString(t.recipient),
-      "amount" -> JsNumber(t.amount),
+  implicit object ChainJsonFormat extends RootJsonFormat[Chain] {
+    override def write(chain: Chain) = chain match {
+      case _: ChainLink => chain.toJson
+      case _ => JsNull
+    }
+
+    override def read(value: JsValue) = ChainLinkJsonFormat.read(value)
+  }
+
+  implicit object ChainLinkJsonFormat extends RootJsonFormat[ChainLink] {
+    override def write(chainLink: ChainLink) = JsObject(
+      "index" -> JsNumber(chainLink.index),
+      "block" -> chainLink.block.toJson,
+      "previousHash" -> JsString(chainLink.previousHash),
+      "tail" -> chainLink.tail.toJson,
+      "timeStamp" -> JsNumber(chainLink.timestamp)
     )
 
     def read(value: JsValue) = {
-      value.asJsObject.getFields("sender", "recipient", "amount") match {
-        case Seq(JsString(sender), JsString(recipient), JsNumber(amount)) =>
-          new Transaction(sender, recipient, amount.toLong)
-        case _ => throw new DeserializationException("Transaction expected")
+      value.asJsObject.getFields("index", "block", "previousHash", "tail", "timestamp") match {
+        case Seq(JsNumber(index), block, JsString(previousHash), tail, JsNumber(timestamp)) =>
+          new ChainLink(index.toInt, block.convertTo(BlockJsonFormat), previousHash, tail.convertTo(ChainJsonFormat), timestamp.toLong)
+        case _ => throw new DeserializationException("ChainLink expected")
       }
     }
   }
-
 }
