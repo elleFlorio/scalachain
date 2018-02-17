@@ -15,6 +15,8 @@ sealed trait Chain {
 
   def ::(block: Block): Chain = ChainLink(this.size + 1, block, blockHash, this)
 
+  override def toString: String = this.toJson.toString()
+
 }
 
 case class ChainLink(index: Int, block: Block, previousHash: String, tail: Chain, timestamp: Long = System.currentTimeMillis()) extends Chain {
@@ -29,11 +31,11 @@ case class ChainLink(index: Int, block: Block, previousHash: String, tail: Chain
 case object EmptyChain extends Chain {
   val size = 0
 
-  val blockHash = null
+  val blockHash = "1"
 
   val block = null
 
-  val proof = -1
+  val proof = 100
 }
 
 

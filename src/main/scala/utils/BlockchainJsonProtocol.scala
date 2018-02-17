@@ -36,22 +36,13 @@ object BlockchainJsonProtocol extends DefaultJsonProtocol {
     }
   }
 
-  implicit object ChainJsonFormat extends RootJsonFormat[Chain] {
-    override def write(chain: Chain) = chain match {
-      case _: ChainLink => chain.toJson
-      case _ => JsNull
-    }
-
-    override def read(value: JsValue) = ChainLinkJsonFormat.read(value)
-  }
-
   implicit object ChainLinkJsonFormat extends RootJsonFormat[ChainLink] {
     override def write(chainLink: ChainLink) = JsObject(
-      "index" -> JsNumber(chainLink.index),
-      "block" -> chainLink.block.toJson,
-      "previousHash" -> JsString(chainLink.previousHash),
-      "tail" -> chainLink.tail.toJson,
-      "timeStamp" -> JsNumber(chainLink.timestamp)
+    "index" -> JsNumber(chainLink.index),
+    "block" -> chainLink.block.toJson,
+    "previousHash" -> JsString(chainLink.previousHash),
+    "tail" -> JsString("TODO"),
+    "timeStamp" -> JsNumber(chainLink.timestamp)
     )
 
     def read(value: JsValue) = {
@@ -61,5 +52,14 @@ object BlockchainJsonProtocol extends DefaultJsonProtocol {
         case _ => throw new DeserializationException("ChainLink expected")
       }
     }
+  }
+
+  implicit object ChainJsonFormat extends RootJsonFormat[Chain] {
+    override def write(chain: Chain) = chain match {
+      case chainLink: ChainLink => chainLink.toJson
+      case _ => JsNull
+    }
+
+    override def read(value: JsValue) = ChainLinkJsonFormat.read(value)
   }
 }
