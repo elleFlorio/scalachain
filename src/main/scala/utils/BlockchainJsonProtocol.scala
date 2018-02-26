@@ -41,7 +41,7 @@ object BlockchainJsonProtocol extends DefaultJsonProtocol {
     "index" -> JsNumber(chainLink.index),
     "block" -> chainLink.block.toJson,
     "previousHash" -> JsString(chainLink.previousHash),
-    "tail" -> JsString("TODO"),
+    "tail" -> chainLink.tail.toJson,
     "timeStamp" -> JsNumber(chainLink.timestamp)
     )
 
@@ -57,7 +57,7 @@ object BlockchainJsonProtocol extends DefaultJsonProtocol {
   implicit object ChainJsonFormat extends RootJsonFormat[Chain] {
     override def write(chain: Chain) = chain match {
       case chainLink: ChainLink => chainLink.toJson
-      case _ => JsNull
+      case _ => JsString("GB1100")
     }
 
     override def read(value: JsValue) = ChainLinkJsonFormat.read(value)
