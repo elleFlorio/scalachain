@@ -38,11 +38,11 @@ object BlockchainJsonProtocol extends DefaultJsonProtocol {
 
   implicit object ChainLinkJsonFormat extends RootJsonFormat[ChainLink] {
     override def write(chainLink: ChainLink) = JsObject(
-    "index" -> JsNumber(chainLink.index),
-    "block" -> chainLink.block.toJson,
-    "previousHash" -> JsString(chainLink.previousHash),
-    "tail" -> chainLink.tail.toJson,
-    "timeStamp" -> JsNumber(chainLink.timestamp)
+      "index" -> JsNumber(chainLink.index),
+      "block" -> chainLink.block.toJson,
+      "previousHash" -> JsString(chainLink.previousHash),
+      "tail" -> chainLink.tail.toJson,
+      "timeStamp" -> JsNumber(chainLink.timestamp)
     )
 
     def read(value: JsValue) = {

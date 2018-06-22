@@ -35,7 +35,7 @@ case object EmptyChain extends Chain {
 
   val block = null
 
-  val proof = 100
+  val proof = 100L
 }
 
 

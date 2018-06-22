@@ -3,13 +3,14 @@ package actor
 import java.util.UUID
 
 import akka.actor.{Actor, ActorLogging, Props}
-import blockchain.Blockchain
+import blockchain.{Blockchain, Chain}
 
 object ScalaChainNode {
   def props: Props = Props(new ScalaChainNode(UUID.randomUUID()))
+  final case class GetTransactions()
   final case class NewTransaction(sender: String, receiver: String, transaction: Long)
   final case class NewBlock(proof: Long)
-  final case class UpdatedChain(blockchain: Blockchain)
+  final case class UpdatedChain(blockchain: Chain)
   final case class MineBlock()
   final case class GetStatus()
 }
@@ -20,9 +21,14 @@ class ScalaChainNode(uuid: UUID) extends Actor with ActorLogging {
   var blockchain = new Blockchain()
 
   override def receive: Receive = {
-    case NewTransaction(sender, receiver, transaction) => {
-      blockchain.addTransaction(sender, receiver, transaction)
-      log.info(s"Added transaction: sender: $sender; receiver: $receiver; transaction:$transaction")
+    case GetTransactions => {
+      log.info(s"Retrieving transactions of next block with id: ${blockchain.getLastIndex() + 1}")
+      sender() ! blockchain.transactions
+    }
+    case NewTransaction(transactionSender, transactionReceiver, transaction) => {
+      val index = blockchain.addTransaction(transactionSender, transactionReceiver, transaction)
+      log.info(s"Added transaction: sender: $transactionSender; receiver: $transactionReceiver; transaction:$transaction")
+      sender() ! index
     }
     case NewBlock(proof) => {
       log.info(s"Received proof: $proof - checking solution...")
@@ -32,11 +38,12 @@ class ScalaChainNode(uuid: UUID) extends Actor with ActorLogging {
       } else {
         log.warning(s"proof $proof not valid!")
       }
-
+      sender() ! blockchain.getLastHash()
     }
     case UpdatedChain(chain) => {
-      blockchain = new Blockchain(chain.getChain())
+      blockchain = new Blockchain(chain)
       log.info(s"chain updated - last block hash: ${blockchain.getLastHash()}")
+      sender() ! blockchain.getLastHash()
     }
     case MineBlock => {
       log.info("Mining new block...")
@@ -46,9 +53,11 @@ class ScalaChainNode(uuid: UUID) extends Actor with ActorLogging {
       log.info(s"Added reward to node $uuid")
       blockchain = blockchain.addBlock(proof)
       log.info(s"new block mined - id: ${blockchain.getLastIndex()}")
+      sender() ! blockchain.getLastIndex()
     }
     case GetStatus => {
       log.info(s"Blockchain status:\n ${blockchain.getChain().toString}")
+      sender() ! blockchain.getChain()
     }
   }
 }
