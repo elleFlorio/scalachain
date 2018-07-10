@@ -1,5 +1,5 @@
 
-import actor.ScalaChainNode
+import actor.Node
 import akka.actor.{ActorRef, ActorSystem}
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Route
@@ -16,7 +16,7 @@ object Server extends App with NodeRoutes {
 
   implicit val materializer: ActorMaterializer = ActorMaterializer()
 
-  val node: ActorRef = system.actorOf(ScalaChainNode.props, "scalaChainNodeActor")
+  val node: ActorRef = system.actorOf(Node.props, "scalaChainNodeActor")
 
   lazy val routes: Route = statusRoutes ~ transactionRoutes ~ blockRoutes ~ chainRoutes ~ mineRoutes
 

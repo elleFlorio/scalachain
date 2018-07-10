@@ -1,12 +1,12 @@
 import akka.actor.{ActorRef, ActorSystem}
 
 object Scalachain extends App {
-  import actor.ScalaChainNode
-  import actor.ScalaChainNode._
+  import actor.Node
+  import actor.Node._
 
   val system: ActorSystem = ActorSystem("scalachain")
 
-  val node: ActorRef = system.actorOf(ScalaChainNode.props, "scalaChainNodeActor")
+  val node: ActorRef = system.actorOf(Node.props, "scalaChainNodeActor")
 
   node ! NewTransaction("A", "B", 1)
 

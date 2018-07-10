@@ -1,3 +1,3 @@
 package blockchain
 
-class Transaction(val sender: String, val recipient: String, val amount: Long)
+case class Transaction(sender: String, recipient: String, value: Long)

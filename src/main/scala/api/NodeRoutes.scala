@@ -1,6 +1,6 @@
 package api
 
-import actor.ScalaChainNode._
+import actor.Node._
 import akka.actor.{ActorRef, ActorSystem}
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
@@ -8,14 +8,13 @@ import akka.http.scaladsl.server.Route
 import akka.pattern.ask
 import akka.util.Timeout
 import blockchain.{Chain, Transaction}
+import utils.JsonSupportNode
 import spray.json.DefaultJsonProtocol._
-import utils.NodeJsonProtocol
-
 import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
-trait NodeRoutes extends NodeJsonProtocol {
+trait NodeRoutes extends JsonSupportNode {
 
   implicit def system: ActorSystem
 
@@ -28,8 +27,10 @@ trait NodeRoutes extends NodeJsonProtocol {
       pathEnd {
         concat(
           get {
-            val status: Future[Chain] = (node ? GetStatus).mapTo[Chain]
-            complete(StatusCodes.OK, status)
+            val statusFuture: Future[Chain] = (node ? GetStatus).mapTo[Chain]
+            onSuccess(statusFuture){ status =>
+              complete(StatusCodes.OK, status)
+            }
           }
         )
       }
@@ -50,7 +51,7 @@ trait NodeRoutes extends NodeJsonProtocol {
           post {
             entity(as[Transaction]) { transaction =>
               val transactionCreated: Future[Int] =
-                (node ? NewTransaction(transaction.sender, transaction.recipient, transaction.amount)).mapTo[Int]
+                (node ? NewTransaction(transaction.sender, transaction.recipient, transaction.value)).mapTo[Int]
               onSuccess(transactionCreated) { done =>
                 complete((StatusCodes.Created, done.toString))
               }

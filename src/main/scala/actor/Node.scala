@@ -3,10 +3,10 @@ package actor
 import java.util.UUID
 
 import akka.actor.{Actor, ActorLogging, Props}
-import blockchain.{Blockchain, Chain}
+import blockchain._
 
-object ScalaChainNode {
-  def props: Props = Props(new ScalaChainNode(UUID.randomUUID()))
+object Node {
+  def props: Props = Props(new Node(UUID.randomUUID()))
   final case class GetTransactions()
   final case class NewTransaction(sender: String, receiver: String, transaction: Long)
   final case class NewBlock(proof: Long)
@@ -15,8 +15,8 @@ object ScalaChainNode {
   final case class GetStatus()
 }
 
-class ScalaChainNode(uuid: UUID) extends Actor with ActorLogging {
-  import ScalaChainNode._
+class Node(uuid: UUID) extends Actor with ActorLogging {
+  import Node._
 
   var blockchain = new Blockchain()
 
@@ -26,7 +26,7 @@ class ScalaChainNode(uuid: UUID) extends Actor with ActorLogging {
       sender() ! blockchain.transactions
     }
     case NewTransaction(transactionSender, transactionReceiver, transaction) => {
-      val index = blockchain.addTransaction(transactionSender, transactionReceiver, transaction)
+      val index = blockchain.addValue(Transaction(transactionSender, transactionReceiver, transaction))
       log.info(s"Added transaction: sender: $transactionSender; receiver: $transactionReceiver; transaction:$transaction")
       sender() ! index
     }
@@ -49,7 +49,7 @@ class ScalaChainNode(uuid: UUID) extends Actor with ActorLogging {
       log.info("Mining new block...")
       val proof = blockchain.findProof()
       log.info(s"Found proof: $proof")
-      blockchain.addTransaction("0", this.uuid.toString, 1)
+      blockchain.addValue(Transaction("0", this.uuid.toString, 1))
       log.info(s"Added reward to node $uuid")
       blockchain = blockchain.addBlock(proof)
       log.info(s"new block mined - id: ${blockchain.getLastIndex()}")
