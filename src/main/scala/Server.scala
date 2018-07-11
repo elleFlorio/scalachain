@@ -18,7 +18,7 @@ object Server extends App with NodeRoutes {
 
   val node: ActorRef = system.actorOf(Node.props, "scalaChainNodeActor")
 
-  lazy val routes: Route = statusRoutes ~ transactionRoutes ~ blockRoutes ~ chainRoutes ~ mineRoutes
+  lazy val routes: Route = statusRoutes ~ transactionRoutes ~ mineRoutes
 
   Http().bindAndHandle(routes, "localhost", 8080)
 
