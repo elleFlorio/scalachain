@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/elleFlorio/scalachain.svg?branch=master)](https://travis-ci.org/elleFlorio/scalachain)
+
 # Scalachain
 Blockchain implemented using the Scala programming language.
 
