@@ -10,7 +10,7 @@ The image can be built using the command:
 
 ```docker build --build-arg SBT_VERSION="1.1.6" -t elleflorio/scalachain .```
 
-The docker image is already available in the Dockerhub
+The docker image is already available in the [Dockerhub](https://hub.docker.com/r/elleflorio/scalachain/)
 
 ## Run the docker container
 The docker container compiles the source code and run the scalachain node. For this reason, when running the container it is required to pass an argument to the init script that indicates the source code to run.
