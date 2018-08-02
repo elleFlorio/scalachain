@@ -1,63 +1,102 @@
 package actor
 
-import java.util.UUID
-
+import actor.Blockchain.{AddBlockCommand, GetChain, GetLastHash, GetLastIndex}
+import actor.Broker.Clear
+import actor.Miner.{Ready, Validate}
 import akka.actor.{Actor, ActorLogging, Props}
+import akka.pattern.ask
+import akka.util.Timeout
 import blockchain._
 
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
+import scala.concurrent.duration._
+import scala.util.{Failure, Success}
+
 object Node {
-  def props: Props = Props(new Node(UUID.randomUUID()))
-  final case class GetTransactions()
-  final case class NewTransaction(sender: String, receiver: String, transaction: Long)
-  final case class NewBlock(proof: Long)
-  final case class UpdatedChain(blockchain: Chain)
-  final case class MineBlock()
-  final case class GetStatus()
+
+  sealed trait NodeMessage
+
+  case class AddTransaction(transaction: Transaction) extends NodeMessage
+
+  case class CheckPowSolution(solution: Long) extends NodeMessage
+
+  case class AddBlock(proof: Long) extends NodeMessage
+
+  case object GetTransactions extends NodeMessage
+
+  case object Mine extends NodeMessage
+
+  case object StopMining extends NodeMessage
+
+  case object GetStatus extends NodeMessage
+
+  case object GetLastBlockIndex extends NodeMessage
+
+  case object GetLastBlockHash extends NodeMessage
+
+  def props(nodeId: String): Props = Props(new Node(nodeId))
 }
 
-class Node(uuid: UUID) extends Actor with ActorLogging {
+class Node(nodeId: String) extends Actor with ActorLogging {
+
   import Node._
 
-  var blockchain = new Blockchain()
+  implicit lazy val timeout = Timeout(5.seconds)
+
+  val broker = context.actorOf(Broker.props)
+  val miner = context.actorOf(Miner.props)
+  val blockchain = context.actorOf(Blockchain.props(EmptyChain, nodeId))
+
+  miner ! Ready
 
   override def receive: Receive = {
-    case GetTransactions => {
-      log.info(s"Retrieving transactions of next block with id: ${blockchain.getLastIndex() + 1}")
-      sender() ! blockchain.transactions
-    }
-    case NewTransaction(transactionSender, transactionReceiver, transaction) => {
-      val index = blockchain.addValue(Transaction(transactionSender, transactionReceiver, transaction))
-      log.info(s"Added transaction: sender: $transactionSender; receiver: $transactionReceiver; transaction:$transaction")
-      sender() ! index
-    }
-    case NewBlock(proof) => {
-      log.info(s"Received proof: $proof - checking solution...")
-      if (blockchain.checkPoWSolution(blockchain.getLastHash(), proof)) {
-        blockchain = blockchain.addBlock(proof)
-        log.info("proof ok, added new block")
-      } else {
-        log.warning(s"proof $proof not valid!")
+    case AddTransaction(transaction) => {
+      val node = sender()
+      broker ! Broker.AddTransaction(transaction)
+      (blockchain ? GetLastIndex).mapTo[Int] onComplete {
+        case Success(index) => node ! (index + 1)
+        case Failure(e) => node ! akka.actor.Status.Failure(e)
       }
-      sender() ! blockchain.getLastHash()
     }
-    case UpdatedChain(chain) => {
-      blockchain = new Blockchain(chain)
-      log.info(s"chain updated - last block hash: ${blockchain.getLastHash()}")
-      sender() ! blockchain.getLastHash()
+    case CheckPowSolution(solution) => {
+      val node = sender()
+      (blockchain ? GetLastHash).mapTo[String] onComplete {
+        case Success(hash: String) => miner.tell(Validate(hash, solution), node)
+        case Failure(e) => node ! akka.actor.Status.Failure(e)
+      }
     }
-    case MineBlock => {
-      log.info("Mining new block...")
-      val proof = blockchain.findProof()
-      log.info(s"Found proof: $proof")
-      blockchain.addValue(Transaction("0", this.uuid.toString, 1))
-      log.info(s"Added reward to node $uuid")
-      blockchain = blockchain.addBlock(proof)
-      log.info(s"new block mined - id: ${blockchain.getLastIndex()}")
-      sender() ! blockchain.getLastIndex()
+    case AddBlock(proof) => {
+      val node = sender()
+      (self ? CheckPowSolution(proof)) onComplete {
+        case Success(_) => {
+          (broker ? Broker.GetTransactions).mapTo[List[Transaction]] onComplete {
+            case Success(transactions) => blockchain.tell(AddBlockCommand(transactions, proof), node)
+            case Failure(e) => node ! akka.actor.Status.Failure(e)
+          }
+          broker ! Clear
+        }
+        case Failure(e) => node ! akka.actor.Status.Failure(e)
+      }
     }
-    case GetStatus => {
-      log.info(s"Blockchain status:\n ${blockchain.getChain().toString}")
-      sender() ! blockchain.getChain()
+    case Mine => {
+      val node = sender()
+      (blockchain ? GetLastHash).mapTo[String] onComplete {
+        case Success(hash) => (miner ? Miner.Mine(hash)).mapTo[Future[Long]] onComplete {
+          case Success(solution) => solution onComplete {
+            case Success(proof) => self ! AddBlock(proof)
+            case Failure(e) => log.error(s"Error finding PoW solution: ${e.getMessage}")
+          }
+          case Failure(e) => log.error(s"Error finding PoW solution: ${e.getMessage}")
+        }
+        case Failure(e) => node ! akka.actor.Status.Failure(e)
+      }
     }
+    case GetTransactions => broker forward Broker.GetTransactions
+    case StopMining => miner forward Miner.StopMining
+    case GetStatus => blockchain forward GetChain
+    case GetLastBlockIndex => blockchain forward GetLastIndex
+    case GetLastBlockHash => blockchain forward GetLastHash
   }
+
 }
