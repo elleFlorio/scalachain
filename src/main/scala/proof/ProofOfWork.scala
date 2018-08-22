@@ -25,7 +25,7 @@ object ProofOfWork {
   def validProof(lastHash: String, proof: Long): Boolean = {
     val guess = (lastHash ++ proof.toString).toJson.toString()
     val guessHash = Crypto.sha256Hash(guess)
-    (guessHash take 2) == "00"
+    (guessHash take 4) == "0000"
   }
 
 }

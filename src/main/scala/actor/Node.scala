@@ -83,20 +83,26 @@ class Node(nodeId: String) extends Actor with ActorLogging {
       val node = sender()
       (blockchain ? GetLastHash).mapTo[String] onComplete {
         case Success(hash) => (miner ? Miner.Mine(hash)).mapTo[Future[Long]] onComplete {
-          case Success(solution) => solution onComplete {
-            case Success(proof) => self ! AddBlock(proof)
-            case Failure(e) => log.error(s"Error finding PoW solution: ${e.getMessage}")
-          }
+          case Success(solution) => waitForSolution(solution)
           case Failure(e) => log.error(s"Error finding PoW solution: ${e.getMessage}")
         }
         case Failure(e) => node ! akka.actor.Status.Failure(e)
       }
     }
     case GetTransactions => broker forward Broker.GetTransactions
-    case StopMining => miner forward Miner.StopMining
     case GetStatus => blockchain forward GetChain
     case GetLastBlockIndex => blockchain forward GetLastIndex
     case GetLastBlockHash => blockchain forward GetLastHash
+  }
+
+  def waitForSolution(solution: Future[Long]) = Future {
+    solution onComplete {
+      case Success(proof) => {
+        self ! AddBlock(proof)
+        miner ! Ready
+      }
+      case Failure(e) => log.error(s"Error finding PoW solution: ${e.getMessage}")
+    }
   }
 
 }

@@ -52,6 +52,9 @@ class Blockchain(chain: Chain, nodeId: String) extends PersistentActor with Acto
 
   def updateState(event: BlockchainEvent) = event match {
     case AddBlockEvent(transactions, proof) =>
-      state = State(ChainLink(state.chain.index + 1, proof, transactions) :: state.chain)
+      {
+        state = State(ChainLink(state.chain.index + 1, proof, transactions) :: state.chain)
+        log.info(s"Added block ${state.chain.index} containing ${transactions.size} transactions")
+      }
   }
 }
