@@ -1,12 +1,12 @@
-package actor
+package com.elleflorio.scalachain.actor
 
-import actor.Blockchain.{AddBlockCommand, GetChain, GetLastHash, GetLastIndex}
-import actor.Broker.Clear
-import actor.Miner.{Ready, Validate}
+import com.elleflorio.scalachain.actor.Blockchain.{AddBlockCommand, GetChain, GetLastHash, GetLastIndex}
+import com.elleflorio.scalachain.actor.Broker.Clear
+import com.elleflorio.scalachain.actor.Miner.{Ready, Validate}
 import akka.actor.{Actor, ActorLogging, Props}
 import akka.pattern.ask
 import akka.util.Timeout
-import blockchain._
+import com.elleflorio.scalachain.blockchain._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future

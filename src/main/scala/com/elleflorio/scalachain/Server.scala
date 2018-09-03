@@ -1,11 +1,12 @@
+package com.elleflorio.scalachain
 
-import actor.Node
 import akka.actor.{ActorRef, ActorSystem}
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
+import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
-import api.NodeRoutes
+import com.elleflorio.scalachain.actor.Node
+import com.elleflorio.scalachain.api.NodeRoutes
 
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration

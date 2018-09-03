@@ -1,15 +1,15 @@
-package actor
+package com.elleflorio.scalachain.actor
 
 import akka.actor.{ActorLogging, Props}
 import akka.persistence._
-import blockchain.{Chain, ChainLink, Transaction}
+import com.elleflorio.scalachain.blockchain.{Chain, ChainLink, Transaction}
 
 object Blockchain {
   sealed trait BlockchainEvent
   case class AddBlockEvent(transactions: List[Transaction], proof: Long) extends BlockchainEvent
 
   sealed trait BlockchainCommand
-  case class AddBlockCommand(transactions: List[Transaction], proof: Long) extends BlockchainEvent
+  case class AddBlockCommand(transactions: List[Transaction], proof: Long) extends BlockchainCommand
   case object GetChain extends BlockchainCommand
   case object GetLastHash extends BlockchainCommand
   case object GetLastIndex extends BlockchainCommand
@@ -38,13 +38,18 @@ class Blockchain(chain: Chain, nodeId: String) extends PersistentActor with Acto
   override def receiveCommand: Receive = {
     case SaveSnapshotSuccess(metadata) => log.info(s"Snapshot ${metadata.sequenceNr} saved successfully")
     case SaveSnapshotFailure(metadata, reason) => log.error(s"Error saving snapshot ${metadata.sequenceNr}: ${reason.getMessage}")
-    case block: AddBlockCommand => {
-      persist(AddBlockEvent(block.transactions, block.proof)) {event =>
+    case AddBlockCommand(transactions : List[Transaction], proof: Long) => {
+      persist(AddBlockEvent(transactions, proof)) {event =>
         updateState(event)
       }
-      saveSnapshot(state)
-      sender() ! state.chain.index
+
+      // This is a workaround to wait until the state is persisted
+      deferAsync(Nil) { _ =>
+        saveSnapshot(state)
+        sender() ! state.chain.index
+      }
     }
+    case AddBlockCommand(_, _) => log.error("invalid add block command")
     case GetChain => sender() ! state.chain
     case GetLastHash => sender() ! state.chain.hash
     case GetLastIndex => sender() ! state.chain.index

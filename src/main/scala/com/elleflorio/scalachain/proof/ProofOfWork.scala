@@ -1,8 +1,8 @@
-package proof
+package com.elleflorio.scalachain.proof
 
 import spray.json._
 import DefaultJsonProtocol._
-import crypto.Crypto
+import com.elleflorio.scalachain.crypto.Crypto
 import spray.json.pimpAny
 
 import scala.annotation.tailrec

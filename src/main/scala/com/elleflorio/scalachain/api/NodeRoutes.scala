@@ -1,6 +1,6 @@
-package api
+package com.elleflorio.scalachain.api
 
-import actor.Node._
+import com.elleflorio.scalachain.actor.Node._
 import akka.actor.{ActorRef, ActorSystem}
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
 import akka.http.scaladsl.model._
@@ -8,8 +8,8 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.pattern.ask
 import akka.util.Timeout
-import blockchain.{Chain, Transaction}
-import utils.JsonSupport._
+import com.elleflorio.scalachain.blockchain.{Chain, Transaction}
+import com.elleflorio.scalachain.utils.JsonSupport._
 
 import scala.concurrent.Future
 import scala.concurrent.duration._

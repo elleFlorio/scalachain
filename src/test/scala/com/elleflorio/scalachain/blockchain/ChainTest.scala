@@ -1,4 +1,4 @@
-package blockchain
+package com.elleflorio.scalachain.blockchain
 
 import org.scalatest.{FlatSpecLike, Matchers}
 

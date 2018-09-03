@@ -1,4 +1,4 @@
-package exception
+package com.elleflorio.scalachain.exception
 
 final class InvalidProofException(val hash: String,
                                   val proof: Long,

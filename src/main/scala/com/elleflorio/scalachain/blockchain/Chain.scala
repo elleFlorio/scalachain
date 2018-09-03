@@ -1,9 +1,9 @@
-package blockchain
+package com.elleflorio.scalachain.blockchain
 
 import java.security.InvalidParameterException
-import utils.JsonSupport._
+import com.elleflorio.scalachain.utils.JsonSupport._
 import spray.json._
-import crypto.Crypto
+import com.elleflorio.scalachain.crypto.Crypto
 
 
 sealed trait Chain {

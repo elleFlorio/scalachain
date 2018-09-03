@@ -1,6 +1,6 @@
-package utils
+package com.elleflorio.scalachain.utils
 
-import blockchain.{Chain, ChainLink, EmptyChain, Transaction}
+import com.elleflorio.scalachain.blockchain.{Chain, ChainLink, EmptyChain, Transaction}
 import spray.json._
 
 object JsonSupport extends DefaultJsonProtocol {

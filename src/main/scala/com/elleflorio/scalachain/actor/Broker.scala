@@ -1,7 +1,7 @@
-package actor
+package com.elleflorio.scalachain.actor
 
 import akka.actor.{Actor, ActorLogging, Props}
-import blockchain.Transaction
+import com.elleflorio.scalachain.blockchain.Transaction
 
 object Broker {
   sealed trait BrokerMessage
