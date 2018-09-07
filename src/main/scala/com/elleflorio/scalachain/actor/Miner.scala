@@ -22,13 +22,13 @@ class Miner extends Actor with ActorLogging{
 
   def validate: Receive = {
     case Validate(hash, proof) => {
-      log.info(s"Validating com.elleflorio.scalachain.proof $proof")
+      log.info(s"Validating proof $proof")
       if (ProofOfWork.validProof(hash, proof)){
-        log.info("com.elleflorio.scalachain.proof is valid!")
+        log.info("proof is valid!")
         sender() ! Success
       }
       else{
-        log.info("com.elleflorio.scalachain.proof is not valid")
+        log.info("proof is not valid")
         sender() ! Failure(new InvalidProofException(hash, proof))
       }
     }
