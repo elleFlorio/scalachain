@@ -13,6 +13,9 @@ import scala.concurrent.duration.Duration
 
 object Server extends App with NodeRoutes {
 
+  val address = if (args.length > 0) args(0) else "localhost"
+  val port = if (args.length > 1) args(1).toInt else 8080
+
   implicit val system: ActorSystem = ActorSystem("scalachain")
 
   implicit val materializer: ActorMaterializer = ActorMaterializer()
@@ -21,9 +24,9 @@ object Server extends App with NodeRoutes {
 
   lazy val routes: Route = statusRoutes ~ transactionRoutes ~ mineRoutes
 
-  Http().bindAndHandle(routes, "localhost", 8080)
+  Http().bindAndHandle(routes, address, port)
 
-  println(s"Server online at http://localhost:8080/")
+  println(s"Server online at http://$address:$port/")
 
   Await.result(system.whenTerminated, Duration.Inf)
 
