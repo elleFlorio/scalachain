@@ -36,6 +36,8 @@ object Node {
   case object GetLastBlockHash extends NodeMessage
 
   def props(nodeId: String): Props = Props(new Node(nodeId))
+
+  def createCoinbaseTransaction(nodeId: String) = Transaction("coinbase", nodeId, 100)
 }
 
 class Node(nodeId: String) extends Actor with ActorLogging {
@@ -98,6 +100,7 @@ class Node(nodeId: String) extends Actor with ActorLogging {
   def waitForSolution(solution: Future[Long]) = Future {
     solution onComplete {
       case Success(proof) => {
+        broker ! Broker.AddTransaction(createCoinbaseTransaction(nodeId))
         self ! AddBlock(proof)
         miner ! Ready
       }
