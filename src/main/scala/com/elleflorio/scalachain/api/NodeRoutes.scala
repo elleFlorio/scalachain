@@ -1,6 +1,6 @@
-package api
+package com.elleflorio.scalachain.api
 
-import actor.Node._
+import com.elleflorio.scalachain.actor.Node._
 import akka.actor.{ActorRef, ActorSystem}
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
 import akka.http.scaladsl.model._
@@ -8,12 +8,11 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.pattern.ask
 import akka.util.Timeout
-import blockchain.{Chain, Transaction}
+import com.elleflorio.scalachain.blockchain.{Chain, Transaction}
+import com.elleflorio.scalachain.utils.JsonSupport._
 
-import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.Future
 import scala.concurrent.duration._
-import utils.JsonSupport._
 
 trait NodeRoutes extends SprayJsonSupport {
 
@@ -29,7 +28,7 @@ trait NodeRoutes extends SprayJsonSupport {
         concat(
           get {
             val statusFuture: Future[Chain] = (node ? GetStatus).mapTo[Chain]
-            onSuccess(statusFuture){ status =>
+            onSuccess(statusFuture) { status =>
               complete(StatusCodes.OK, status)
             }
           }
@@ -43,8 +42,8 @@ trait NodeRoutes extends SprayJsonSupport {
       pathEnd {
         concat(
           get {
-            val transactionsRetrieved: Future[ArrayBuffer[Transaction]] =
-              (node ? GetTransactions).mapTo[ArrayBuffer[Transaction]]
+            val transactionsRetrieved: Future[List[Transaction]] =
+              (node ? GetTransactions).mapTo[List[Transaction]]
             onSuccess(transactionsRetrieved) { transactions =>
               complete(transactions.toList)
             }
@@ -52,7 +51,7 @@ trait NodeRoutes extends SprayJsonSupport {
           post {
             entity(as[Transaction]) { transaction =>
               val transactionCreated: Future[Int] =
-                (node ? NewTransaction(transaction.sender, transaction.recipient, transaction.value)).mapTo[Int]
+                (node ? AddTransaction(transaction)).mapTo[Int]
               onSuccess(transactionCreated) { done =>
                 complete((StatusCodes.Created, done.toString))
               }
@@ -68,7 +67,7 @@ trait NodeRoutes extends SprayJsonSupport {
       pathEnd {
         concat(
           get {
-            node ? MineBlock
+            node ! Mine
             complete(StatusCodes.OK)
           }
         )
