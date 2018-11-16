@@ -9,7 +9,7 @@ Scalachain is a blockchain implemented using the Scala programming language and 
 
 For this reason, any contribution is welcome! :-)
 
-I want to write an article to describe the development process of the project. I wil publish the link to it ASAP! ;-)
+I published a story on freeCodeCamp where I explain in depth the development of Scalachain. Read it [here](https://medium.freecodecamp.org/how-to-build-a-simple-actor-based-blockchain-aac1e996c177)! :-)
 
 ### TL;DR
 Run the Scalachain node using ```sbt``` (```sbt run```) or the Docker container (see ```/docker``` folder).
