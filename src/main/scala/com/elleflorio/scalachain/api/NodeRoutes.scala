@@ -33,6 +33,20 @@ trait NodeRoutes extends SprayJsonSupport {
             }
           }
         )
+      },
+      pathPrefix("members") {
+        concat(
+          pathEnd {
+            concat(
+              get {
+                val membersFuture: Future[List[String]] = (node ? GetClusterMembers).mapTo[List[String]]
+                onSuccess(membersFuture) { members =>
+                  complete(StatusCodes.OK, members)
+                }
+              }
+            )
+          }
+        )
       }
     )
   }

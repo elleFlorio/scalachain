@@ -3,10 +3,12 @@ package com.elleflorio.scalachain.actor
 import com.elleflorio.scalachain.actor.Blockchain.{AddBlockCommand, GetChain, GetLastHash, GetLastIndex}
 import com.elleflorio.scalachain.actor.Broker.Clear
 import com.elleflorio.scalachain.actor.Miner.{Ready, Validate}
-import akka.actor.{Actor, ActorLogging, Props}
+import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import akka.pattern.ask
 import akka.util.Timeout
 import com.elleflorio.scalachain.blockchain._
+import com.elleflorio.scalachain.cluster.ClusterManager
+import com.elleflorio.scalachain.cluster.ClusterManager.GetMembers
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -35,6 +37,8 @@ object Node {
 
   case object GetLastBlockHash extends NodeMessage
 
+  case object GetClusterMembers
+
   def props(nodeId: String): Props = Props(new Node(nodeId))
 
   def createCoinbaseTransaction(nodeId: String) = Transaction("coinbase", nodeId, 100)
@@ -46,9 +50,10 @@ class Node(nodeId: String) extends Actor with ActorLogging {
 
   implicit lazy val timeout = Timeout(5.seconds)
 
-  val broker = context.actorOf(Broker.props)
-  val miner = context.actorOf(Miner.props)
-  val blockchain = context.actorOf(Blockchain.props(EmptyChain, nodeId))
+  val broker: ActorRef = context.actorOf(Broker.props)
+  val miner: ActorRef = context.actorOf(Miner.props)
+  val blockchain: ActorRef = context.actorOf(Blockchain.props(EmptyChain, nodeId))
+  val clusterManager: ActorRef = context.actorOf(ClusterManager.props(nodeId), "clusterManager")
 
   miner ! Ready
 
@@ -95,6 +100,7 @@ class Node(nodeId: String) extends Actor with ActorLogging {
     case GetStatus => blockchain forward GetChain
     case GetLastBlockIndex => blockchain forward GetLastIndex
     case GetLastBlockHash => blockchain forward GetLastHash
+    case GetClusterMembers => clusterManager forward GetMembers
   }
 
   def waitForSolution(solution: Future[Long]) = Future {
