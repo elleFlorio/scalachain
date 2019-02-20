@@ -1,14 +1,15 @@
 package com.elleflorio.scalachain.actor
 
-import com.elleflorio.scalachain.actor.Blockchain.{AddBlockCommand, GetChain, GetLastHash, GetLastIndex}
-import com.elleflorio.scalachain.actor.Broker.Clear
-import com.elleflorio.scalachain.actor.Miner.{Ready, Validate}
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import akka.pattern.ask
 import akka.util.Timeout
+import com.elleflorio.scalachain.actor.Blockchain.{AddBlockCommand, GetChain, GetLastHash, GetLastIndex}
+import com.elleflorio.scalachain.actor.Broker.Clear
+import com.elleflorio.scalachain.actor.Miner.{Ready, Validate}
 import com.elleflorio.scalachain.blockchain._
-import com.elleflorio.scalachain.cluster.ClusterManager
 import com.elleflorio.scalachain.cluster.ClusterManager.GetMembers
+import com.elleflorio.scalachain.cluster.ClusterMediator.TransactionMessage
+import com.elleflorio.scalachain.cluster.{ClusterManager, ClusterMediator}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -54,15 +55,18 @@ class Node(nodeId: String) extends Actor with ActorLogging {
   val miner: ActorRef = context.actorOf(Miner.props)
   val blockchain: ActorRef = context.actorOf(Blockchain.props(EmptyChain, nodeId))
   val clusterManager: ActorRef = context.actorOf(ClusterManager.props(nodeId), "clusterManager")
+  val clusterMediator: ActorRef = context.actorOf(ClusterMediator.props(broker))
 
   miner ! Ready
 
   override def receive: Receive = {
     case AddTransaction(transaction) => {
       val node = sender()
-      broker ! Broker.AddTransaction(transaction)
       (blockchain ? GetLastIndex).mapTo[Int] onComplete {
-        case Success(index) => node ! (index + 1)
+        case Success(index) => {
+          clusterMediator ! TransactionMessage(transaction)
+          node ! (index + 1)
+        }
         case Failure(e) => node ! akka.actor.Status.Failure(e)
       }
     }
