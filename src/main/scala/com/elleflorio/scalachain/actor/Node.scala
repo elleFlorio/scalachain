@@ -1,15 +1,13 @@
 package com.elleflorio.scalachain.actor
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import akka.cluster.pubsub.DistributedPubSub
 import akka.pattern.ask
 import akka.util.Timeout
 import com.elleflorio.scalachain.actor.Blockchain.{AddBlockCommand, GetChain, GetLastHash, GetLastIndex}
 import com.elleflorio.scalachain.actor.Broker.Clear
 import com.elleflorio.scalachain.actor.Miner.{Ready, Validate}
 import com.elleflorio.scalachain.blockchain._
-import com.elleflorio.scalachain.cluster.ClusterManager.GetMembers
-import com.elleflorio.scalachain.cluster.ClusterMediator.TransactionMessage
-import com.elleflorio.scalachain.cluster.{ClusterManager, ClusterMediator}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -38,24 +36,20 @@ object Node {
 
   case object GetLastBlockHash extends NodeMessage
 
-  case object GetClusterMembers
-
-  def props(nodeId: String): Props = Props(new Node(nodeId))
+  def props(nodeId: String, mediator: ActorRef): Props = Props(new Node(nodeId, mediator))
 
   def createCoinbaseTransaction(nodeId: String) = Transaction("coinbase", nodeId, 100)
 }
 
-class Node(nodeId: String) extends Actor with ActorLogging {
+class Node(nodeId: String, mediator: ActorRef) extends Actor with ActorLogging {
 
   import Node._
 
   implicit lazy val timeout = Timeout(5.seconds)
 
-  val broker: ActorRef = context.actorOf(Broker.props)
+  val broker: ActorRef = context.actorOf(Broker.props(mediator))
   val miner: ActorRef = context.actorOf(Miner.props)
   val blockchain: ActorRef = context.actorOf(Blockchain.props(EmptyChain, nodeId))
-  val clusterManager: ActorRef = context.actorOf(ClusterManager.props(nodeId), "clusterManager")
-  val clusterMediator: ActorRef = context.actorOf(ClusterMediator.props(broker))
 
   miner ! Ready
 
@@ -64,7 +58,7 @@ class Node(nodeId: String) extends Actor with ActorLogging {
       val node = sender()
       (blockchain ? GetLastIndex).mapTo[Int] onComplete {
         case Success(index) => {
-          clusterMediator ! TransactionMessage(transaction)
+          broker ! Broker.AddTransaction(transaction)
           node ! (index + 1)
         }
         case Failure(e) => node ! akka.actor.Status.Failure(e)
@@ -104,7 +98,6 @@ class Node(nodeId: String) extends Actor with ActorLogging {
     case GetStatus => blockchain forward GetChain
     case GetLastBlockIndex => blockchain forward GetLastIndex
     case GetLastBlockHash => blockchain forward GetLastHash
-    case GetClusterMembers => clusterManager forward GetMembers
   }
 
   def waitForSolution(solution: Future[Long]) = Future {

@@ -9,6 +9,7 @@ import akka.http.scaladsl.server.Route
 import akka.pattern.ask
 import akka.util.Timeout
 import com.elleflorio.scalachain.blockchain.{Chain, Transaction}
+import com.elleflorio.scalachain.cluster.ClusterManager.GetMembers
 import com.elleflorio.scalachain.utils.JsonSupport._
 
 import scala.concurrent.Future
@@ -19,6 +20,7 @@ trait NodeRoutes extends SprayJsonSupport {
   implicit def system: ActorSystem
 
   def node: ActorRef
+  def clusterManager: ActorRef
 
   implicit lazy val timeout = Timeout(5.seconds)
 
@@ -39,7 +41,7 @@ trait NodeRoutes extends SprayJsonSupport {
           pathEnd {
             concat(
               get {
-                val membersFuture: Future[List[String]] = (node ? GetClusterMembers).mapTo[List[String]]
+                val membersFuture: Future[List[String]] = (clusterManager ? GetMembers).mapTo[List[String]]
                 onSuccess(membersFuture) { members =>
                   complete(StatusCodes.OK, members)
                 }

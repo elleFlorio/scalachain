@@ -1,6 +1,7 @@
 package com.elleflorio.scalachain.cluster
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import akka.cluster.pubsub.DistributedPubSub
 import akka.cluster.{Cluster, MemberStatus}
 import com.elleflorio.scalachain.cluster.ClusterManager.GetMembers
 

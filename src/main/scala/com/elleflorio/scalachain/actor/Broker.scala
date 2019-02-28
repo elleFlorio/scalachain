@@ -1,24 +1,34 @@
 package com.elleflorio.scalachain.actor
 
-import akka.actor.{Actor, ActorLogging, Props}
+import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import akka.cluster.pubsub.DistributedPubSub
+import akka.cluster.pubsub.DistributedPubSubMediator.{Publish, Subscribe, SubscribeAck}
 import com.elleflorio.scalachain.blockchain.Transaction
 
 object Broker {
   sealed trait BrokerMessage
+  case class TransactionMessage(transaction: Transaction) extends BrokerMessage
   case class AddTransaction(transaction: Transaction) extends BrokerMessage
   case object GetTransactions extends BrokerMessage
+
   case object Clear extends BrokerMessage
 
-  val props: Props = Props(new Broker)
+  def props(mediator: ActorRef): Props = Props(new Broker(mediator))
 }
 
-class Broker extends Actor with ActorLogging {
+class Broker(mediator: ActorRef) extends Actor with ActorLogging {
   import Broker._
+
+  mediator ! Subscribe("transaction", self)
 
   var pending: List[Transaction] = List()
 
   override def receive: Receive = {
     case AddTransaction(transaction) => {
+      mediator ! Publish("transaction", TransactionMessage(transaction))
+      log.info(s"Published $transaction to transaction topic")
+    }
+    case TransactionMessage(transaction) => {
       pending = transaction :: pending
       log.info(s"Added $transaction to pending Transaction")
     }
@@ -30,5 +40,7 @@ class Broker extends Actor with ActorLogging {
       pending = List()
       log.info("Clear pending transaction List")
     }
+    case SubscribeAck(Subscribe("transaction", None, `self`)) =>
+      log.info("subscribing")
   }
 }
