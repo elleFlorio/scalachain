@@ -9,7 +9,7 @@ The Dockerfile lets you build the Docker Image of a scalachain node. In details,
 
 The image can be built using the command:
 
-```docker build --build-arg SBT_VERSION="1.1.6" -t elleflorio/scalachain .```
+```docker build --build-arg SBT_VERSION="1.2.7" -t elleflorio/scalachain .```
 
 The docker image is already available in the [Dockerhub](https://hub.docker.com/r/elleflorio/scalachain/)
 
