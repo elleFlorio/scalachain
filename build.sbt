@@ -30,4 +30,4 @@ libraryDependencies ++= Seq(
   "com.github.dnvriend" %% "akka-persistence-inmemory" % akkaPersistenceInmemoryVersion
 )
 
-
+fork in Test := true

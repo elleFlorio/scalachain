@@ -3,7 +3,7 @@ package com.elleflorio.scalachain.actor
 import akka.actor.{ActorRef, ActorSystem}
 import akka.cluster.pubsub.DistributedPubSub
 import akka.testkit.{ImplicitSender, TestKit}
-import com.elleflorio.scalachain.actor.Broker.{AddTransaction, Clear, GetTransactions}
+import com.elleflorio.scalachain.actor.Broker.{AddTransaction, Clear, GetTransactions, TransactionMessage}
 import com.elleflorio.scalachain.blockchain.Transaction
 import org.scalatest.{BeforeAndAfterAll, FlatSpecLike, Matchers}
 
@@ -34,8 +34,8 @@ class BrokerTest(_system: ActorSystem) extends TestKit(_system)
     val transaction1 = Transaction("A", "B", 100)
     val transaction2 = Transaction("C", "D", 1000)
 
-    broker ! AddTransaction(transaction1)
-    broker ! AddTransaction(transaction2)
+    broker ! TransactionMessage(transaction1)
+    broker ! TransactionMessage(transaction2)
 
     broker ! GetTransactions
     expectMsg(500 millis, List(transaction2, transaction1))
@@ -46,8 +46,8 @@ class BrokerTest(_system: ActorSystem) extends TestKit(_system)
     val transaction1 = Transaction("A", "B", 100)
     val transaction2 = Transaction("C", "D", 1000)
 
-    broker ! AddTransaction(transaction1)
-    broker ! AddTransaction(transaction2)
+    broker ! TransactionMessage(transaction1)
+    broker ! TransactionMessage(transaction2)
 
     broker ! Clear
 
