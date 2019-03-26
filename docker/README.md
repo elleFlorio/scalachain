@@ -18,13 +18,13 @@ The docker container compiles the source code and run the scalachain node. For t
 
 To run a branch of the remote repo simply pass the name of the branch as the argument. e.g.:
 
-```docker run --name scalachain-dev -p 8080:8080 elleflorio/scalachain development```
+```docker run --name scalachain-dev -p 8000:8000 elleflorio/scalachain development```
 
 This will run the code of the branch ```development```.
 
-To run the local source code mounting the local folder to the container /development one, use the ```-v /your/source/folder:/development``` and pass ```local``` as the argument to the script. e.g.:
+To run the local source code mounting the local folder to the container ```/development``` one, use the ```-v /your/source/folder:/development``` and pass ```local``` as the argument to the script. You can optionally specify a folder inside the container where the source in the volume should be mounted, e.g. ```/tmp/scalachain```. The source will be automatically copied inside the ```/development``` folder. This is useful when you are running multiple containers in the same machine. This is a complete example:
 
-```docker run --name scalachain -p 8080:8080 -v ~/Development/scala/scalachain/:/development elleflorio/scalachain local```
+```docker run --name scalachain -p 8080:8080 -v ~/Development/scala/scalachain/:/tmp/scalachain elleflorio/scalachain local /tmp/scalachain```
 
 This will run the code contained in the folder ```~/Development/scala/scalachain/```.
 
