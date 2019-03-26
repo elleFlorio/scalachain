@@ -9,15 +9,7 @@ Scalachain is a blockchain implemented using the Scala programming language and 
 
 For this reason, any contribution is welcome! :-)
 
-I will try to write some short but specific articles about the development of the different part of the project. The roadmap is the following, but it may change during time:
-* Scalachain - Functional Actor Based Blockchain
-* Scalachain - Blockchain implementation in Scala
-* Scalachain - The Actor Model
-* Scalachain - Broker, a Simple Actor
-* Scalachain - Miner, an Actor with Different States
-* Scalachain - Blockchain, a Persistent Actor
-* Scalachain - Node, an Actor to Rule Them All
-* Scalachain - REST API with Akka HTTP
+I published a story on freeCodeCamp where I explain in depth the development of Scalachain. Read it [here](https://medium.freecodecamp.org/how-to-build-a-simple-actor-based-blockchain-aac1e996c177)! :-)
 
 ### TL;DR
 Run the Scalachain node using ```sbt``` (```sbt run```) or the Docker container (see ```/docker``` folder).
