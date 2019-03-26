@@ -1,0 +1,60 @@
+version: '3.7'
+
+networks:
+  scalachain-network:
+
+services:
+  seed:
+    networks:
+      - scalachain-network
+    image: elleflorio/scalachain
+    volumes:
+      - ~/Development/scala/scalachain/:/tmp/scalachain
+    ports:
+      - '2552:2552'
+      - '8000:8000'
+    environment:
+      SERVER_IP: 0.0.0.0
+      CLUSTER_IP: seed
+      CLUSTER_SEED_IP: seed
+      SCALACHAIN_PERSISTENCE_DIR: '/persistence/seed/journal'
+      SCALACHAIN_SNAPSHOTS_DIR: '/persistence/seed/snapshots'
+    command: ["local", "/tmp/scalachain"]
+
+  node1:
+    networks:
+      - scalachain-network
+    image: elleflorio/scalachain
+    volumes:
+      - ~/Development/scala/scalachain/:/tmp/scalachain
+    ports:
+      - '8001:8000'
+    environment:
+      SERVER_IP: 0.0.0.0
+      CLUSTER_IP: node1
+      CLUSTER_PORT: 1600
+      CLUSTER_SEED_IP: seed
+      CLUSTER_SEED_PORT: 2552
+      SCALACHAIN_NODE_ID: node1
+      SCALACHAIN_PERSISTENCE_DIR: '/persistence/node1/journal'
+      SCALACHAIN_SNAPSHOTS_DIR: '/persistence/node1/snapshots'
+    command: ["local", "/tmp/scalachain"]
+
+  node2:
+    networks:
+      - scalachain-network
+    image: elleflorio/scalachain
+    volumes:
+      - ~/Development/scala/scalachain/:/tmp/scalachain
+    ports:
+      - '8002:8000'
+    environment:
+      SERVER_IP: 0.0.0.0
+      CLUSTER_IP: node2
+      CLUSTER_PORT: 1600
+      CLUSTER_SEED_IP: seed
+      CLUSTER_SEED_PORT: 2552
+      SCALACHAIN_NODE_ID: node2
+      SCALACHAIN_PERSISTENCE_DIR: '/persistence/node2/journal'
+      SCALACHAIN_SNAPSHOTS_DIR: '/persistence/node2/snapshots'
+    command: ["local", "/tmp/scalachain"]

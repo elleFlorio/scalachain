@@ -22,9 +22,9 @@ object JsonSupport extends DefaultJsonProtocol {
   }
 
   implicit object ChainLinkJsonFormat extends RootJsonFormat[ChainLink] {
-    override def read(json: JsValue): ChainLink = json.asJsObject.getFields("index", "proof", "values", "previousHash", "tail", "timestamp") match {
-      case Seq(JsNumber(index), JsNumber(proof), values, JsString(previousHash), tail, JsNumber(timestamp)) =>
-        ChainLink(index.toInt, proof.toLong, values.convertTo[List[Transaction]], previousHash, tail.convertTo(ChainJsonFormat), timestamp.toLong)
+    override def read(json: JsValue): ChainLink = json.asJsObject.getFields("index", "proof", "values", "previousHash", "timestamp", "tail") match {
+      case Seq(JsNumber(index), JsNumber(proof), values, JsString(previousHash), JsNumber(timestamp), tail) =>
+        ChainLink(index.toInt, proof.toLong, values.convertTo[List[Transaction]], previousHash, timestamp.toLong, tail.convertTo(ChainJsonFormat))
       case _ => throw new DeserializationException("Cannot deserialize: Chainlink expected")
     }
 
@@ -33,8 +33,8 @@ object JsonSupport extends DefaultJsonProtocol {
       "proof" -> JsNumber(obj.proof),
       "values" -> JsArray(obj.values.map(_.toJson).toVector),
       "previousHash" -> JsString(obj.previousHash),
-      "tail" -> ChainJsonFormat.write(obj.tail),
-      "timestamp" -> JsNumber(obj.timestamp)
+      "timestamp" -> JsNumber(obj.timestamp),
+      "tail" -> ChainJsonFormat.write(obj.tail)
     )
   }
 

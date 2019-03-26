@@ -35,7 +35,7 @@ class BlockchainTest(_system: ActorSystem) extends TestKit(_system)
 
     val transactions = List(Transaction("a", "b", 1L))
     val proof = 1L
-    blockchain ! AddBlockCommand(transactions, proof)
+    blockchain ! AddBlockCommand(transactions, proof, System.currentTimeMillis())
     expectMsg(1000 millis, 1)
 
     blockchain ! GetLastIndex

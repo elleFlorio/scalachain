@@ -1,8 +1,9 @@
 package com.elleflorio.scalachain.actor
 
+import akka.actor.{ActorRef, ActorSystem}
+import akka.cluster.pubsub.DistributedPubSub
+import akka.testkit.{ImplicitSender, TestKit}
 import com.elleflorio.scalachain.actor.Broker.{AddTransaction, Clear, GetTransactions}
-import akka.actor.ActorSystem
-import akka.testkit.{ImplicitSender, TestKit, TestProbe}
 import com.elleflorio.scalachain.blockchain.Transaction
 import org.scalatest.{BeforeAndAfterAll, FlatSpecLike, Matchers}
 
@@ -15,19 +16,20 @@ class BrokerTest(_system: ActorSystem) extends TestKit(_system)
   with BeforeAndAfterAll {
 
   def this() = this(ActorSystem("broker-test"))
+  val mediator: ActorRef = DistributedPubSub(this.system).mediator
 
   override def afterAll: Unit = {
     shutdown(system)
   }
 
-  "A Broker com.elleflorio.scalachain.actor" should "start with an empty list of transactions" in {
+  "A Broker Actor" should "start with an empty list of transactions" in {
     val broker = system.actorOf(Broker.props)
 
     broker ! GetTransactions
     expectMsg(500 millis, List())
   }
 
-  "A Broker com.elleflorio.scalachain.actor" should "return the correct list of added transactions" in {
+  "A Broker Actor" should "return the correct list of added transactions" in {
     val broker = system.actorOf(Broker.props)
     val transaction1 = Transaction("A", "B", 100)
     val transaction2 = Transaction("C", "D", 1000)
@@ -39,7 +41,7 @@ class BrokerTest(_system: ActorSystem) extends TestKit(_system)
     expectMsg(500 millis, List(transaction2, transaction1))
   }
 
-  "A Broker com.elleflorio.scalachain.actor" should "clear the transaction lists when requested" in {
+  "A Broker Actor" should "clear the transaction lists when requested" in {
     val broker = system.actorOf(Broker.props)
     val transaction1 = Transaction("A", "B", 100)
     val transaction2 = Transaction("C", "D", 1000)

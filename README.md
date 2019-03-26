@@ -9,11 +9,15 @@ Scalachain is a blockchain implemented using the Scala programming language and 
 
 For this reason, any contribution is welcome! :-)
 
-I published a story on freeCodeCamp where I explain in depth the development of Scalachain. Read it [here](https://medium.freecodecamp.org/how-to-build-a-simple-actor-based-blockchain-aac1e996c177)! :-)
+I published a story on freeCodeCamp where I explain in depth the development of Scalachain [v1.0](https://github.com/elleFlorio/scalachain/releases/tag/v.1.0). Read it [here](https://medium.freecodecamp.org/how-to-build-a-simple-actor-based-blockchain-aac1e996c177)! :-)
 
 ### TL;DR
-Run the Scalachain node using ```sbt``` (```sbt run```) or the Docker container (see ```/docker``` folder).
-The API to interact with Scalachain are documented [here](https://documenter.getpostman.com/view/4636741/RWaHw8yx).
+Run Scalachain following these steps:
+1. build the Docker image as described in the ```/docker``` folder
+2. Run the cluster of 3 nodes using the ```docker-compose up``` command in the root folder of the project. 
+3. Use The API documented [here](https://documenter.getpostman.com/view/4636741/RWaHw8yx) to interact with Scalachain nodes.
+
+Enjoy! :grin:
 
 ### Quick introduction to the blockchain
 There a lot of good articles that explain how a blockchain works, so I will do a high level introduction just to provide some context to this project.
@@ -63,9 +67,21 @@ The hierarchy of actors is depicted in the following diagram of the Scalachain n
 
 * **Node Actor** is on the top of the hierarchy of actors: it manages all the operations executed by the other actors, and it is the junction point between the API and the business logic implemented inside the actors.
 
+* **ClusterManager Actor** is the manager of the cluster. Its in charge of everything cluster related, such as return the current active members of the cluster.
+
+* **ClusterListener Actor** listens to the events that happen in the cluster - a member is up/down, etc. - and logs it for debugging purpose.
+
+### Scalachain cluster ###
+Since scalachain v2.0 is possible to run a cluster of Scalachain nodes. The easiest way to create a simple cluster is to run the docker-compose.yml file with the command ```docker-compose up```. This will spawn a 3 nodes cluster with 1 seed and 2 nodes. You can send a transaction to one node that will be propagated to the other ones in the cluster. Once a node mines a block, it will send it to the other nodes of the cluster that will add it to their local blockchain.
+
 ### Scalachain API
-Scalachain node runs a server at default address ```http://localhost:8080/``` using Akka HTTP.
+The cluster is composed of 3 nodes, mapped to the following addresses:
+* http://localhost:8000 - ```seed```
+* http://localhost:8001 - ```node1```
+* http://localhost:8002 - ```node2```
 The API to interact with the node is documented [here](https://documenter.getpostman.com/view/4636741/RWaHw8yx)
 
 ### How to run Scalachain
-Scalachain node can be run using ```sbt``` (```sbt run```) or a Docker container. The instructions on how to run it using Docker can be found inside the ```/docker``` folder.
+Run Scalachain following these steps:
+1. build the Docker image as described in the ```/docker``` folder
+2. Run the cluster of 3 nodes using the ```docker-compose up``` command in the root folder of the project.

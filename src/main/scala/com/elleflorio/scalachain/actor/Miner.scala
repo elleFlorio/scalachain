@@ -37,7 +37,9 @@ class Miner extends Actor with ActorLogging{
   def ready: Receive = validate orElse {
     case Mine(hash) => {
       log.info(s"Mining hash $hash...")
-      val proof = Future {(ProofOfWork.proofOfWork(hash))}
+      val proof = Future {
+        ProofOfWork.proofOfWork(hash)
+      }
       sender() ! proof
       become(busy)
     }

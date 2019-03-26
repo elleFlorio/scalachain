@@ -4,7 +4,7 @@ RUN apk add --no-cache git openssh && \
     mkdir /development
 
 # GIT
-ADD repo-key /
+COPY docker/repo-key /
 RUN chmod 600 /repo-key && \  
     echo "IdentityFile /repo-key" >> /etc/ssh/ssh_config && \  
     echo -e "StrictHostKeyChecking no" >> /etc/ssh/ssh_config && \
@@ -19,7 +19,10 @@ RUN apk add --no-cache bash && \
     chmod 0755 /usr/local/bin/sbt && \
     apk del build-dependencies
 
-ADD init.sh /etc/init.sh
+RUN cd /development && \
+    sbt sbtVersion
+
+COPY docker/init.sh /etc/init.sh
 
 RUN chmod +x /etc/init.sh
 

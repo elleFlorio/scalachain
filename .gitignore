@@ -4,3 +4,4 @@
 target/
 persistence/journal/*
 persistence/snapshots/*
+.DS_Store
