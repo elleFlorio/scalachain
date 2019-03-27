@@ -3,12 +3,18 @@ package com.elleflorio.scalachain.actor
 import akka.actor.{Actor, ActorLogging, Props}
 import akka.cluster.pubsub.DistributedPubSubMediator.{Subscribe, SubscribeAck}
 import com.elleflorio.scalachain.blockchain.Transaction
+import Broker._
 
 object Broker {
+
   sealed trait BrokerMessage
+
   case class TransactionMessage(transaction: Transaction) extends BrokerMessage
+
   case class AddTransaction(transaction: Transaction) extends BrokerMessage
+
   case class DiffTransaction(transactions: List[Transaction]) extends BrokerMessage
+
   case object GetTransactions extends BrokerMessage
 
   case object Clear extends BrokerMessage
@@ -17,7 +23,6 @@ object Broker {
 }
 
 class Broker extends Actor with ActorLogging {
-  import Broker._
 
   var pending: List[Transaction] = List()
 

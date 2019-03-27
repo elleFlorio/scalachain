@@ -8,7 +8,7 @@ import org.scalatest.{BeforeAndAfterAll, FlatSpecLike, Matchers}
 
 import scala.concurrent.duration._
 
-class BlockchainTest(_system: ActorSystem) extends TestKit(_system)
+class BlockchainTest(sys: ActorSystem) extends TestKit(sys)
   with ImplicitSender
   with Matchers
   with FlatSpecLike

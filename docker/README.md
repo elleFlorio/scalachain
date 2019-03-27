@@ -1,11 +1,11 @@
 # Scalachain Docker image
 The Dockerfile lets you build the Docker Image of a scalachain node. In details, the Dockerfile:
-* copy the ssh private key to pull from the repo - **N.B. the key is only for read operations**
-* download the [sbt](https://www.scala-sbt.org/) version specified through the image ```build-arg``` parameter
-* install git and openssh
-* checkout the project
-* copy the script file init.sh
-* ```EXPOSE``` port 8080 
+*   copy the ssh private key to pull from the repo - **N.B. the key is only for read operations**
+*   download the [sbt](https://www.scala-sbt.org/) version specified through the image ```build-arg``` parameter
+*   install git and openssh
+*   checkout the project
+*   copy the script file init.sh
+*   ```EXPOSE``` port 8080 
 
 The image can be built using the command:
 

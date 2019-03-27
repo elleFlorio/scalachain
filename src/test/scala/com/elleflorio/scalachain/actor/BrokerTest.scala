@@ -9,7 +9,7 @@ import org.scalatest.{BeforeAndAfterAll, FlatSpecLike, Matchers}
 
 import scala.concurrent.duration._
 
-class BrokerTest(_system: ActorSystem) extends TestKit(_system)
+class BrokerTest(sys: ActorSystem) extends TestKit(sys)
   with ImplicitSender
   with Matchers
   with FlatSpecLike

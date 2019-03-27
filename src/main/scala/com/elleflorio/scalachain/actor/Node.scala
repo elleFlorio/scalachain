@@ -6,6 +6,7 @@ import akka.pattern.ask
 import akka.util.Timeout
 import com.elleflorio.scalachain.actor.Blockchain.{AddBlockCommand, GetChain, GetLastHash, GetLastIndex}
 import com.elleflorio.scalachain.actor.Miner.{Ready, Validate}
+import com.elleflorio.scalachain.actor.Node._
 import com.elleflorio.scalachain.blockchain._
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -45,8 +46,6 @@ object Node {
 }
 
 class Node(nodeId: String, mediator: ActorRef) extends Actor with ActorLogging {
-
-  import Node._
 
   implicit lazy val timeout = Timeout(5.seconds)
 

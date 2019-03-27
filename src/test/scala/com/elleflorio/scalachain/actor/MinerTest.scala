@@ -9,7 +9,7 @@ import org.scalatest.{BeforeAndAfterAll, FlatSpecLike, Matchers}
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
-class MinerTest(_system: ActorSystem) extends TestKit(_system)
+class MinerTest(sys: ActorSystem) extends TestKit(sys)
   with ImplicitSender
   with Matchers
   with FlatSpecLike

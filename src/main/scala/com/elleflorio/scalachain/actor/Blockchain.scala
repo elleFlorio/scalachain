@@ -3,15 +3,22 @@ package com.elleflorio.scalachain.actor
 import akka.actor.{ActorLogging, Props}
 import akka.persistence._
 import com.elleflorio.scalachain.blockchain.{Chain, ChainLink, Transaction}
+import Blockchain._
 
 object Blockchain {
+
   sealed trait BlockchainEvent
+
   case class AddBlockEvent(transactions: List[Transaction], proof: Long, timestamp: Long) extends BlockchainEvent
 
   sealed trait BlockchainCommand
+
   case class AddBlockCommand(transactions: List[Transaction], proof: Long, timestamp: Long) extends BlockchainCommand
+
   case object GetChain extends BlockchainCommand
+
   case object GetLastHash extends BlockchainCommand
+
   case object GetLastIndex extends BlockchainCommand
 
   case class State(chain: Chain)
@@ -20,7 +27,6 @@ object Blockchain {
 }
 
 class Blockchain(chain: Chain, nodeId: String) extends PersistentActor with ActorLogging {
-  import Blockchain._
 
   var state = State(chain)
 
@@ -38,8 +44,8 @@ class Blockchain(chain: Chain, nodeId: String) extends PersistentActor with Acto
   override def receiveCommand: Receive = {
     case SaveSnapshotSuccess(metadata) => log.info(s"Snapshot ${metadata.sequenceNr} saved successfully")
     case SaveSnapshotFailure(metadata, reason) => log.error(s"Error saving snapshot ${metadata.sequenceNr}: ${reason.getMessage}")
-    case AddBlockCommand(transactions : List[Transaction], proof: Long, timestamp: Long) => {
-      persist(AddBlockEvent(transactions, proof, timestamp)) {event =>
+    case AddBlockCommand(transactions: List[Transaction], proof: Long, timestamp: Long) => {
+      persist(AddBlockEvent(transactions, proof, timestamp)) { event =>
         updateState(event)
       }
 
@@ -56,10 +62,9 @@ class Blockchain(chain: Chain, nodeId: String) extends PersistentActor with Acto
   }
 
   def updateState(event: BlockchainEvent) = event match {
-    case AddBlockEvent(transactions, proof, timestamp) =>
-      {
-        state = State(ChainLink(state.chain.index + 1, proof, transactions, timestamp = timestamp) :: state.chain)
-        log.info(s"Added block ${state.chain.index} containing ${transactions.size} transactions")
-      }
+    case AddBlockEvent(transactions, proof, timestamp) => {
+      state = State(ChainLink(state.chain.index + 1, proof, transactions, timestamp = timestamp) :: state.chain)
+      log.info(s"Added block ${state.chain.index} containing ${transactions.size} transactions")
+    }
   }
 }
