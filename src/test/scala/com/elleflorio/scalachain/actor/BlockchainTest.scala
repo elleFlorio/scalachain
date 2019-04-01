@@ -8,7 +8,7 @@ import org.scalatest.{BeforeAndAfterAll, FlatSpecLike, Matchers}
 
 import scala.concurrent.duration._
 
-class BlockchainTest(_system: ActorSystem) extends TestKit(_system)
+class BlockchainTest(sys: ActorSystem) extends TestKit(sys)
   with ImplicitSender
   with Matchers
   with FlatSpecLike
@@ -35,7 +35,7 @@ class BlockchainTest(_system: ActorSystem) extends TestKit(_system)
 
     val transactions = List(Transaction("a", "b", 1L))
     val proof = 1L
-    blockchain ! AddBlockCommand(transactions, proof)
+    blockchain ! AddBlockCommand(transactions, proof, System.currentTimeMillis())
     expectMsg(1000 millis, 1)
 
     blockchain ! GetLastIndex

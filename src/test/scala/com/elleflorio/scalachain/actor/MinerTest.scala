@@ -9,19 +9,19 @@ import org.scalatest.{BeforeAndAfterAll, FlatSpecLike, Matchers}
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
-class MinerTest(_system: ActorSystem) extends TestKit(_system)
+class MinerTest(sys: ActorSystem) extends TestKit(sys)
   with ImplicitSender
   with Matchers
   with FlatSpecLike
   with BeforeAndAfterAll {
 
-  def this() = this(ActorSystem("broker-test"))
+  def this() = this(ActorSystem("miner-test"))
 
   override def afterAll: Unit = {
     shutdown(system)
   }
 
-  "A Miner com.elleflorio.scalachain.actor" should "be ready when requested" in {
+  "A Miner Actor" should "be ready when requested" in {
     val miner = system.actorOf(Miner.props)
 
     miner ! Ready
@@ -30,7 +30,7 @@ class MinerTest(_system: ActorSystem) extends TestKit(_system)
     expectMsg(500 millis, Success("OK"))
   }
 
-  "A Miner com.elleflorio.scalachain.actor" should "be busy while mining a new block" in {
+  "A Miner Actor" should "be busy while mining a new block" in {
     val miner = system.actorOf(Miner.props)
 
     miner ! Ready
