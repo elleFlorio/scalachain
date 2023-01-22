@@ -5,10 +5,14 @@ version := "0.1"
 scalaVersion := "2.12.4"
 
 resolvers ++= Seq(
-  "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/",
-  "dnvriend" at "http://dl.bintray.com/dnvriend/maven",
+  "Typesafe Simple Repository" at
+    "http://repo.typesafe.com/typesafe/simple/maven-releases/",
+  Resolver.bintrayRepo("dnvriend", "maven"),
   Resolver.jcenterRepo
 )
+
+resolvers += Resolver.bintrayRepo("dnvriend", "maven")
+
 
 lazy val akkaVersion = "2.5.21"
 lazy val akkaHttpVersion = "10.1.7"
@@ -27,7 +31,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-stream" % akkaVersion,
   "com.typesafe.akka" %% "akka-cluster" % akkaVersion,
   "com.typesafe.akka" %% "akka-cluster-tools" % akkaVersion,
-  "com.github.dnvriend" %% "akka-persistence-inmemory" % akkaPersistenceInmemoryVersion
+  "com.github.dnvriend" %% "akka-persistence-inmemory" % "2.5.15.2"
 )
 
 fork in Test := true
