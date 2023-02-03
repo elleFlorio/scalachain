@@ -14,7 +14,7 @@ resolvers ++= Seq(
 resolvers += Resolver.bintrayRepo("dnvriend", "maven")
 
 
-lazy val akkaVersion = "2.5.21"
+lazy val akkaVersion = "2.5.15"
 lazy val akkaHttpVersion = "10.1.7"
 lazy val akkaPersistenceInmemoryVersion = "2.5.15.1"
 lazy val scalaTestVersion = "3.0.5"
@@ -34,4 +34,3 @@ libraryDependencies ++= Seq(
   "com.github.dnvriend" %% "akka-persistence-inmemory" % "2.5.15.2"
 )
 
-fork in Test := true
